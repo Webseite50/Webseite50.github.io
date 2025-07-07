@@ -107,9 +107,11 @@
 
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
+      const startTime = Date.now();
       const params = new URLSearchParams(window.location.search);
       const savedUser = params.get("username");
       const savedPass = params.get("password");
+      const regTime = params.get("regtime") || 0;
 
       const form = document.getElementById('loginForm');
       if (savedUser) document.getElementById('username').value = savedUser;
@@ -119,17 +121,14 @@
         const u = document.getElementById('username').value;
         const p = document.getElementById('password').value;
 
-        if (savedUser && savedPass && (u === savedUser) && (p === savedPass)) {
-          alert("Login erfolgreich!");
-          // Weiterleitung
-          window.location.href = "register.html";
+        if (savedUser && savedPass && u === savedUser && p === savedPass) {
+          const lt = ((Date.now() - startTime) / 1000).toFixed(2);
+          const target = `https://webseite60.github.io/success.html?username=${encodeURIComponent(u)}&password=${encodeURIComponent(p)}&regtime=${regTime}&logintime=${lt}&startStep=5`;
+          console.log('Redirect to:', target);
+          window.location.href = target;
         } else {
           alert("Benutzername oder Passwort falsch.");
         }
-        const lt = ((Date.now() - startTime) / 1000).toFixed(2);
-        const target = `https://webseite60.github.io/register.html?username=${encodeURIComponent(u)}&password=${encodeURIComponent(pw)}&regtime=${params.regtime}&logintime=${lt}&startStep=5`;
-        console.log('Redirect to:', target);
-        window.location.href = target;
       });
     });
   </script>
