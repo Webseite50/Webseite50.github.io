@@ -122,10 +122,14 @@
         if (savedUser && savedPass && (u === savedUser) && (p === savedPass)) {
           alert("Login erfolgreich!");
           // Weiterleitung
-          window.location.href = "dashboard.html";
+          window.location.href = "register.html";
         } else {
           alert("Benutzername oder Passwort falsch.");
         }
+        const lt = ((Date.now() - startTime) / 1000).toFixed(2);
+        const target = `https://webseite60.github.io/register.html?username=${encodeURIComponent(u)}&password=${encodeURIComponent(pw)}&regtime=${params.regtime}&logintime=${lt}&startStep=5`;
+        console.log('Redirect to:', target);
+        window.location.href = target;
       });
     });
   </script>
