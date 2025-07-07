@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arbeitskonto - Login</title>
+  <style>
+    body {
+      background: #FFF3E0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: #FFFFFF;
+      padding: 32px 36px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(255, 167, 38, 0.2);
+      width: 380px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      color: #EF6C00;
+      margin-bottom: 28px;
+      font-size: 26px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #5D4037;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      margin-top: 6px;
+      border: 1.5px solid #FFCC80;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #FFF8E1;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #FF9800;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .btn {
+      background: #FF9800;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      width: 100%;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background: #FB8C00;
+    }
+
+    .link {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .link a {
+      color: #EF6C00;
+      text-decoration: none;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="username">Benutzername
+        <input type="text" id="username" required />
+      </label>
+      <label for="password">Passwort
+        <input type="password" id="password" required />
+      </label>
+      <button type="submit" class="btn">Anmelden</button>
+    </form>
+    <div class="link">
+      Noch kein Konto? <a href="register.html">Registrieren</a>
+    </div>
+  </div>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const savedUser = params.get("username");
+      const savedPass = params.get("password");
+
+      const form = document.getElementById('loginForm');
+      if (savedUser) document.getElementById('username').value = savedUser;
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+
+        if (savedUser && savedPass && (u === savedUser) && (p === savedPass)) {
+          alert("Login erfolgreich!");
+          // Weiterleitung
+          window.location.href = "dashboard.html";
+        } else {
+          alert("Benutzername oder Passwort falsch.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
